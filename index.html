@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ясно | Инженерный аудит участка</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --text-primary: #ffffff;
+            --text-secondary: #d1d5db; 
+            --accent-gold: #d4af37;
+            --glass-bg: rgba(18, 22, 28, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.08); /* Чуть тоньше рамка для элитарности */
+            --btn-bg: rgba(255, 255, 255, 0.03); /* Дорогая прозрачность */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            font-size: 18px; 
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 16px;
+            background-color: #0c0f12;
+            
+            /* Новое фото: Современный загородный дом, хвойные деревья (без пальм). Ночь/сумерки. */
+            background-image: 
+                linear-gradient(to bottom, rgba(12, 15, 18, 0.75), rgba(12, 15, 18, 0.98)),
+                url('bg.png');
+            background-size: cover;
+            background-position: center center;
+        }
+
+        .glass-card {
+            max-width: 500px;
+            width: 100%;
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 40px 32px;
+            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.7);
+            animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Личное обращение спикера */
+        .profile-block {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .profile-avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background-color: #1a1e24;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--accent-gold);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .profile-info h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 2px;
+            letter-spacing: -0.5px;
+        }
+
+        .profile-info p {
+            font-size: 0.85rem;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 20px;
+            text-align: left; /* Ровнее читается */
+            letter-spacing: -0.5px;
+        }
+
+        /* Структурированный текст (Буллеты вместо пелены текста) */
+        .features-list {
+            list-style: none;
+            margin-bottom: 32px;
+        }
+
+        .features-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+
+        .features-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .features-list li svg {
+            min-width: 20px;
+            width: 20px;
+            height: 20px;
+            margin-top: 2px; /* Выравнивание по 1 строке */
+            stroke: var(--accent-gold);
+        }
+
+        .features-list strong {
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        /* Кнопки "Монако" премиум стиль (убран фирменный цвет мессенджеров) */
+        .links-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            padding: 18px 24px; 
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.05rem;
+            color: #ffffff;
+            background-color: var(--btn-bg);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .btn svg {
+            width: 22px;
+            height: 22px;
+            fill: none;
+            stroke: var(--accent-gold);
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            opacity: 0.8;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: rgba(212, 175, 55, 0.05); /* Золотое свечение */
+            border-color: rgba(212, 175, 55, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .btn:hover svg {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
+        footer {
+            margin-top: 32px;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.3);
+            text-align: center;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 400px) {
+            .glass-card { padding: 32px 20px; }
+            h1 { font-size: 1.3rem; }
+            .profile-avatar { width: 56px; height: 56px; }
+            .btn { font-size: 1rem; padding: 16px 20px; }
+        }
+    </style>
+</head>
+<body>
+    
+    <main class="glass-card">
+        
+        <!-- Личное обращение спикера -->
+        <div class="profile-block">
+            <div class="profile-avatar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                </svg>
+            </div>
+            <div class="profile-info">
+                <h2>Иван</h2>
+                <p>Инжиниринговое бюро «Ясно»</p>
+            </div>
+        </div>
+        
+        <h1>Спасибо за внимание на выставке!</h1>
+        
+        <!-- Структурированный текст: Галочки вместо длинного абзаца (Скорость чтения) -->
+        <ul class="features-list">
+            <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                <span>Заберите Гайд <strong>«Умный сад 2026»</strong></span>
+            </li>
+            <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                <span>Изучите <strong>реальные сметы</strong> на ландшафтный инжиниринг под ключ</span>
+            </li>
+            <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                <span>Забронируйте выезд инженера для <strong>персональной концепции</strong> освещения участка</span>
+            </li>
+        </ul>
+        
+        <div class="links-container">
+            <!-- Премиум-кнопка WhatsApp (Без зеленого цвета) -->
+            <a href="https://wa.me/79000000000?text=%D0%98%D0%B2%D0%B0%D0%BD%2C%20%D0%B4%D0%BE%D0%B1%D1%80%D1%8B%D0%B9%20%D0%B4%D0%B5%D0%BD%D1%8C.%20%D0%AF%20%D1%81%20%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D0%B8%20%D0%BD%D0%B0%20%D0%92%D0%94%D0%9D%D0%A5.%20%D0%9F%D1%80%D0%B8%D1%88%D0%BB%D0%B8%D1%82%D0%B5%2C%20%D0%BF%D0%BE%D0%B6%D0%B0%D0%BB%D1%83%D0%B9%D1%81%D1%82%D0%B0%2C%20%D0%93%D0%B0%D0%B9%D0%B4%20%D0%BF%D0%BE%20%D1%81%D0%BC%D0%B5%D1%82%D0%B0%D0%BC%20%D0%B8%20%D0%A3%D0%BC%D0%BD%D0%BE%D0%BC%D1%83%20%D1%81%D0%B0%D0%B4%D1%83." 
+               class="btn" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24"><path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9"></path><path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1"></path></svg>
+                Написать в WhatsApp
+            </a>
+            
+            <!-- Премиум-кнопка Telegram (Без синего цвета) -->
+            <a href="https://t.me/YOUR_USERNAME" 
+               class="btn" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24"><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4"></path></svg>
+                Написать в Telegram
+            </a>
+        </div>
+        
+        <footer>
+            &copy; 2026 Инжиниринговое бюро «Ясно» | Инженерия ландшафта
+        </footer>
+    </main>
+
+</body>
+</html>
